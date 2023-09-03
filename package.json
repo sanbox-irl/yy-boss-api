@@ -19,10 +19,9 @@
     "license": "MIT",
     "devDependencies": {
         "@types/fs-extra": "^9.0.1",
-        "@types/node": "^14.0.27",
+        "@types/node": "^14.18.58",
         "@types/semver": "^7.3.4",
-        "@types/tar": "^4.0.3",
-        "typescript": "^3.9.7"
+        "@types/tar": "^4.0.3"
     },
     "dependencies": {
         "axios": "^1.5.0",

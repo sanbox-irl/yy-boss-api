@@ -1,22 +1,6 @@
-# YY-BOSS-TS
+# YY-BOSS-API
 
-This is a Typescript binding for the Yy-Boss Json Api. It is in early stages of development, but will be complete, as much as the YyBoss is, in the foreseeable future.
-
-The **YyBoss** is an executable which is capable of making changes to a given Gms2, 2.3, project. It takes Json commands over stdin. It is, itself, written in Rust, and can also be used as a library for other Rust projects.
-
-This project, **YyBossTs**, provides an interface to abstract the exe into a simple async library. Calls to the YyBoss look similar to the following:
-
-```ts
-async function main() {
-    const yyp_boss = await create_yy_boss();
-
-    await yyp_boss.writeCommand(new CreateFolderVfs('folders/Test.yy', 'Test2'));
-    await yyp_boss.writeCommand(new SerializationCommand());
-    await yyp_boss.shutdown();
-}
-```
-
-More details on the YyBoss project generally can be found here, at [the YyBoss Github page](https://github.com/NPC-Studio/yy-boss).
+This is a Typescript binding for the Yy-Boss Json Api. More details on the YyBoss project generally can be found here, at [the YyBoss Github page](https://github.com/NPC-Studio/yy-boss).
 
 ## License
 

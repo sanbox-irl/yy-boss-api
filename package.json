@@ -1,12 +1,12 @@
 {
-    "name": "yy-boss-ts",
-    "version": "0.2.4",
+    "name": "yy-boss-api",
+    "version": "0.1.0",
     "description": "A shim to handle the YyBoss exe.",
     "main": "./out/index.js",
     "types": "./out/index.d.ts",
     "repository": {
         "type": "git",
-        "directory": "https://github.com/NPC-Studio/yy-boss-ts"
+        "directory": "https://github.com/sanbox-irl/yy-boss-api"
     },
     "files": [
         "/out"
@@ -25,7 +25,7 @@
         "typescript": "^3.9.7"
     },
     "dependencies": {
-        "axios": "^0.20.0",
+        "axios": "^1.5.0",
         "extract-zip": "^2.0.1",
         "fs-extra": "^9.0.1",
         "semver": "^7.3.2",

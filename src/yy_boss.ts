@@ -36,10 +36,6 @@ export const enum ClosureStatus {
     UnexpectedShutdown = 'UnexpectedShutdown',
 }
 
-class ShutdownCommand extends Command {
-    protected type: CommandType = CommandType.Shutdown;
-}
-
 export class YyBoss {
     private yyBossHandle: ChildProcessWithoutNullStreams;
     private _closureStatus: ClosureStatus = ClosureStatus.Open;
@@ -203,17 +199,17 @@ export class YyBoss {
      * @param command The command to send to the YyBoss. The return type of this function
      * is dependent on the command issued.
      */
-    public writeCommand<T extends Command>(command: T): Promise<CommandToOutput<T>> {
+    public writeCommand<T extends Command>(command: T): Promise<CommandToOutput<T> | undefined> {
         return new Promise((resolve, _) => {
             this.expected_callback = cmd => {
                 if (cmd === undefined) {
-                    resolve();
+                    resolve(undefined);
                     return;
                 }
 
                 if (cmd.success === false) {
                     this._error = (cmd as CommandOutputError).error;
-                    resolve();
+                    resolve(undefined);
                 } else {
                     resolve(cmd as CommandToOutput<T>);
                 }
@@ -226,23 +222,10 @@ export class YyBoss {
     }
 
     /**
-     * Shuts the YyBoss down internally, and safely. Callbacks attached with `YyBoss.attachUnexpectedShutdownCallback`
-     * will **not** be called.
+     * Shuts the YyBoss down internally, and safely.
      */
-    public shutdown(): Promise<Output> {
-        return new Promise((resolve, _) => {
-            this.expected_callback = cmd => {
-                if (cmd === undefined) {
-                    resolve();
-                } else {
-                    resolve(cmd);
-                }
-            };
-
-            this._closureStatus = ClosureStatus.ExpectedShutdown;
-            const instruction = JSON.stringify(new ShutdownCommand()) + '\n';
-            this.yyBossHandle.stdin.write(instruction);
-        });
+    public shutdown() {
+        this._closureStatus = ClosureStatus.ExpectedShutdown;
     }
 
     /**
